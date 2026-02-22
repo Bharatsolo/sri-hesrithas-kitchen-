@@ -5,12 +5,12 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
-  title: "Sri Hesritha's Cloud Kitchen | Premium Home-Style Food in Hyderabad",
+  title: "Sri Hesritha's Cloud Kitchen | Premium Home-Style Food in Bangalore",
   description:
-    "Order delicious home-style food from Sri Hesritha's Cloud Kitchen. Authentic flavors, fresh ingredients, and fast delivery in Hyderabad. Non-veg specials, veg delights, and wholesome combos.",
+    "Order delicious home-style food from Sri Hesritha's Cloud Kitchen. Authentic flavors, fresh ingredients, and fast delivery in Bangalore. Non-veg specials, veg delights, and wholesome combos.",
   keywords: [
     "cloud kitchen",
-    "Hyderabad food",
+    "Bangalore food",
     "home delivery",
     "biryani",
     "Indian food",

@@ -32,7 +32,7 @@ export const testimonials: Testimonial[] = [
         id: '4',
         name: 'Mohammed Faisal',
         rating: 5,
-        text: 'The Mutton Gravy is worth every rupee. Tender meat, rich gravy, and authentic Hyderabadi flavors. My family loves it!',
+        text: 'The Mutton Gravy is worth every rupee. Tender meat, rich gravy, and authentic Bangalore flavors. My family loves it!',
         date: '1 week ago',
     },
     {

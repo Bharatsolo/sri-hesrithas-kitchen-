@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: "About Us | Sri Hesritha's Cloud Kitchen",
-    description: "Learn about Sri Hesritha's Cloud Kitchen — our story, values, and commitment to authentic home-style food in Hyderabad.",
+    description: "Learn about Sri Hesritha's Cloud Kitchen — our story, values, and commitment to authentic home-style food in Bangalore.",
 };
 
 export default function AboutPage() {
@@ -34,7 +34,7 @@ export default function AboutPage() {
                             to our slow-cooked Mutton Gravy — inspired us to launch our cloud kitchen.
                         </p>
                         <p>
-                            Today, we serve hundreds of happy customers across Hyderabad, delivering the warmth
+                            Today, we serve hundreds of happy customers across Bangalore, delivering the warmth
                             and comfort of a home-cooked meal right to their doorstep.
                         </p>
                     </div>
