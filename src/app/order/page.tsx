@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 
 export default function OrderPage() {
+    const router = useRouter();
     const { items, updateQuantity, removeItem, totalPrice, totalItems, clearCart } = useCart();
     const [deliveryMode, setDeliveryMode] = useState<'delivery' | 'pickup'>('delivery');
     const [isBulkOrder, setIsBulkOrder] = useState(false);
@@ -89,45 +91,48 @@ export default function OrderPage() {
 
         if (isBulkOrder) {
             // Build Bulk Order WhatsApp message
-            message = `🎉 *New Bulk Order Inquiry — Sri Hesritha's Cloud Kitchen*\n\n`;
-            message += `👤 *Name:* ${bulkFormData.name}\n`;
-            message += `📞 *Phone:* ${bulkFormData.phone}\n`;
-            message += `📅 *Event Date:* ${bulkFormData.date}\n`;
-            message += `🕐 *Event Time:* ${bulkFormData.time}\n`;
-            message += `👥 *Number of People:* ${bulkFormData.guestCount}\n`;
-            message += `� *Event Type:* ${bulkFormData.eventType}\n\n`;
-            message += `�🍽️ *Menu Preferences/Items needed:*\n${bulkFormData.preferences}\n`;
+            message = `*New Bulk Order Inquiry — Sri Hesritha's Cloud Kitchen*\n\n`;
+            message += `*Name:* ${bulkFormData.name}\n`;
+            message += `*Phone:* ${bulkFormData.phone}\n`;
+            message += `*Event Date:* ${bulkFormData.date}\n`;
+            message += `*Event Time:* ${bulkFormData.time}\n`;
+            message += `*Number of People:* ${bulkFormData.guestCount}\n`;
+            message += `*Event Type:* ${bulkFormData.eventType}\n\n`;
+            message += `*Menu Preferences/Items needed:*\n${bulkFormData.preferences}\n`;
             if (bulkFormData.instructions) {
-                message += `\n📝 *Special Instructions:* ${bulkFormData.instructions}\n`;
+                message += `\n*Special Instructions:* ${bulkFormData.instructions}\n`;
             }
         } else {
             // Build Regular Order WhatsApp message
-            message = `🍽️ *New Order — Sri Hesritha's Cloud Kitchen*\n\n`;
-            message += `👤 *Name:* ${formData.name}\n`;
-            message += `📞 *Phone:* ${formData.phone}\n`;
-            message += `📦 *Mode:* ${deliveryMode === 'delivery' ? '🚚 Delivery' : '🏠 Pickup'}\n`;
+            message = `*New Order — Sri Hesritha's Cloud Kitchen*\n\n`;
+            message += `*Name:* ${formData.name}\n`;
+            message += `*Phone:* ${formData.phone}\n`;
+            message += `*Mode:* ${deliveryMode === 'delivery' ? 'Delivery' : 'Pickup'}\n`;
 
             if (deliveryMode === 'delivery' && formData.address) {
-                message += `📍 *Address:* ${formData.address}\n`;
+                message += `*Address:* ${formData.address}\n`;
             }
 
-            if (formData.date) message += `📅 *Date:* ${formData.date}\n`;
-            if (formData.time) message += `🕐 *Time:* ${formData.time}\n`;
+            if (formData.date) message += `*Date:* ${formData.date}\n`;
+            if (formData.time) message += `*Time:* ${formData.time}\n`;
 
-            message += `\n🛒 *Order Details:*\n`;
+            message += `\n*Order Details:*\n`;
             items.forEach((ci) => {
-                message += `• ${ci.item.name} x${ci.quantity} — ₹${ci.item.price * ci.quantity}\n`;
+                message += `- ${ci.item.name} x${ci.quantity} — Rs.${ci.item.price * ci.quantity}\n`;
             });
-            message += `\n💰 *Total: ₹${totalPrice}*\n`;
+            message += `\n*Total: Rs.${totalPrice}*\n`;
 
             if (formData.instructions) {
-                message += `\n📝 *Special Instructions:* ${formData.instructions}\n`;
+                message += `\n*Special Instructions:* ${formData.instructions}\n`;
             }
 
         }
 
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/918074702928?text=${encodedMessage}`, '_blank');
+        // Save the message and total price, then redirect to Payment page
+        localStorage.setItem('pendingWaMessage', message);
+        localStorage.setItem('paymentAmount', isBulkOrder ? 'Bulk Inquiry' : totalPrice.toString());
+        router.push('/payment');
     };
 
     return (
@@ -331,11 +336,11 @@ export default function OrderPage() {
 
                                     <button
                                         type="submit"
-                                        className="btn btn-whatsapp"
+                                        className="btn btn-primary"
                                         disabled={totalItems === 0}
                                         style={{ width: '100%', justifyContent: 'center', opacity: totalItems === 0 ? 0.5 : 1 }}
                                     >
-                                        💬 Confirm Order on WhatsApp
+                                        💳 Proceed to Payment
                                     </button>
                                 </>
                             ) : (
@@ -464,10 +469,10 @@ export default function OrderPage() {
 
                                     <button
                                         type="submit"
-                                        className="btn btn-whatsapp"
+                                        className="btn btn-primary"
                                         style={{ width: '100%', justifyContent: 'center' }}
                                     >
-                                        💬 Send Bulk Order Inquiry
+                                        💳 Proceed to Payment
                                     </button>
                                 </>
                             )}
