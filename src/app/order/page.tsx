@@ -51,10 +51,10 @@ export default function OrderPage() {
         const tD = String(tomorrow.getDate()).padStart(2, '0');
         setBulkMinDate(`${tY}-${tM}-${tD}`);
 
-        // If today is selected or no date is selected yet, require 2 hours lead time
+        // If today is selected or no date is selected yet, require 1 hour lead time
         if (!formData.date || formData.date === todayStr) {
             const now = new Date();
-            now.setHours(now.getHours() + 2);
+            now.setHours(now.getHours() + 1);
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             setMinTime(`${hours}:${minutes}`);
