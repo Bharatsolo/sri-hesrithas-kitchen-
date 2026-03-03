@@ -16,8 +16,10 @@ export default function MenuPage() {
 
     // Daily specials logic based on current date to stay the same all day
     const specials = useMemo(() => {
-        const vegList = menuItems.filter(item => item.isVeg && item.category !== 'combo');
-        const nonVegList = menuItems.filter(item => !item.isVeg && item.category !== 'combo');
+        const nonVegList = menuItems.filter(item => item.category === 'non-veg');
+        const vegList = menuItems.filter(item => item.category === 'veg');
+        const breakfastList = menuItems.filter(item => item.category === 'breakfast');
+        const gymLoversList = menuItems.filter(item => item.category === 'gym-lovers');
 
         const dateStr = new Date().toISOString().split('T')[0];
         let hash = 0;
@@ -26,25 +28,25 @@ export default function MenuPage() {
         }
         hash = Math.abs(hash);
 
-        const vItem = vegList[hash % vegList.length];
-        const nvItem = nonVegList[hash % nonVegList.length];
+        const getSpecial = (list: typeof menuItems) => {
+            if (list.length === 0) return null;
+            const item = list[hash % list.length];
+            return {
+                ...item,
+                price: Math.round(item.price * 0.9),
+                id: `special-${item.id}`,
+                name: `★ Today's Special: ${item.name}`
+            };
+        };
 
-        if (!vItem || !nvItem) return [];
+        const specialsList = [
+            getSpecial(nonVegList),
+            getSpecial(vegList),
+            getSpecial(breakfastList),
+            getSpecial(gymLoversList)
+        ].filter(Boolean) as typeof menuItems;
 
-        return [
-            {
-                ...vItem,
-                price: Math.round(vItem.price * 0.9),
-                id: `special-${vItem.id}`,
-                name: `★ Today's Special: ${vItem.name}`
-            },
-            {
-                ...nvItem,
-                price: Math.round(nvItem.price * 0.9),
-                id: `special-${nvItem.id}`,
-                name: `★ Today's Special: ${nvItem.name}`
-            }
-        ];
+        return specialsList;
     }, []);
 
     // Helper to render a menu card

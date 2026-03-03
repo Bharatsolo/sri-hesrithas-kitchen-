@@ -1,4 +1,4 @@
-export type Category = 'non-veg' | 'veg' | 'combo';
+export type Category = 'non-veg' | 'veg' | 'combo' | 'breakfast' | 'gym-lovers';
 
 export interface MenuItem {
   id: string;
@@ -140,11 +140,105 @@ export const menuItems: MenuItem[] = [
     isVeg: true,
     image: '/images/veg-combo.jpg',
   },
+  // Breakfast
+  {
+    id: 'punganalu',
+    name: 'Punganalu',
+    price: 79,
+    category: 'breakfast',
+    description: 'Traditional spiced rice and lentil dumplings, crispy on the outside and soft inside.',
+    isVeg: true,
+    image: '/images/punganalu.png',
+  },
+  {
+    id: 'poori-sabhji',
+    name: 'Poori with sabhji',
+    price: 119,
+    category: 'breakfast',
+    description: 'Fluffy deep-fried whole wheat poories served with a spiced potato sabhji.',
+    isVeg: true,
+    image: '/images/poori-sabhji.png',
+  },
+  {
+    id: 'pongal',
+    name: 'Pongal',
+    price: 149,
+    category: 'breakfast',
+    description: 'Wholesome rice and moong dal porridge tempered with black pepper, cumin, and ginger.',
+    isVeg: true,
+    image: '/images/pongal.png',
+  },
+  {
+    id: 'karabath',
+    name: 'Karabath',
+    price: 99,
+    category: 'breakfast',
+    description: 'Savory semolina porridge cooked with vegetables and aromatic south Indian spices.',
+    isVeg: true,
+    image: '/images/karabath.png',
+  },
+  // Gym Lovers
+  {
+    id: 'boiled-eggs-2',
+    name: 'Boiled Eggs (2 pcs)',
+    price: 49,
+    category: 'gym-lovers',
+    description: 'Perfectly hard-boiled eggs — an excellent source of high-quality protein.',
+    isVeg: false,
+    image: '/images/boiled-eggs.png',
+  },
+  {
+    id: 'boiled-eggs-4',
+    name: 'Boiled Eggs (4 pcs)',
+    price: 89,
+    category: 'gym-lovers',
+    description: 'Four protein-packed boiled eggs, perfect for post-workout recovery.',
+    isVeg: false,
+    image: '/images/boiled-eggs.png',
+  },
+  {
+    id: 'steamed-chicken-salad',
+    name: 'Steamed Chicken Salad',
+    price: 199,
+    category: 'gym-lovers',
+    description: 'Lean steamed chicken breast tossed with fresh greens, cucumbers, and a light lemon dressing.',
+    isVeg: false,
+    image: '/images/steamed-chicken-salad.png',
+  },
+  {
+    id: 'sprouts-bowl',
+    name: 'Sprouts Bowl',
+    price: 79,
+    category: 'gym-lovers',
+    description: 'Crunchy mixed sprouts with chopped onions, tomatoes, green chillies, and a squeeze of lime.',
+    isVeg: true,
+    image: '/images/sprouts-bowl.png',
+  },
+  {
+    id: 'peanut-butter-toast',
+    name: 'Peanut Butter & Banana Toast',
+    price: 129,
+    category: 'gym-lovers',
+    description: 'Whole grain toast topped with creamy peanut butter and fresh banana slices.',
+    isVeg: true,
+    image: '/images/peanut-butter-toast.png',
+  },
+  {
+    id: 'greek-yogurt-fruits',
+    name: 'Greek Yogurt with Fruits',
+    price: 159,
+    category: 'gym-lovers',
+    description: 'High-protein Greek yogurt topped with seasonal fruits and a drizzle of honey.',
+    isVeg: true,
+    image: '/images/greek-yogurt.png',
+  },
 ];
 
 export const categories = [
   { id: 'all', label: 'All' },
   { id: 'non-veg', label: 'Non-Veg Specials' },
   { id: 'veg', label: 'Veg Delights' },
+  { id: 'breakfast', label: 'Breakfast' },
+  { id: 'gym-lovers', label: 'Gym Lovers' },
   { id: 'combo', label: 'Combos' },
 ] as const;
