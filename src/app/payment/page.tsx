@@ -74,12 +74,72 @@ export default function PaymentPage() {
                         />
                     </div>
 
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                        marginBottom: '24px',
+                        backgroundColor: '#f8f9fa',
+                        padding: '8px 16px',
+                        borderRadius: '50px',
+                        border: '1px solid #e0e0e0'
+                    }}>
+                        <span style={{ fontSize: '1rem', color: '#555', fontFamily: 'monospace' }}>8074702928-2@axl</span>
+                        <button
+                            onClick={() => {
+                                navigator.clipboard.writeText('8074702928-2@axl');
+                                const btn = document.getElementById('copy-btn');
+                                if (btn) {
+                                    btn.innerText = 'Copied!';
+                                    btn.style.color = '#00ba00';
+                                    setTimeout(() => {
+                                        btn.innerText = 'Copy';
+                                        btn.style.color = '#5f259f';
+                                    }, 2000);
+                                }
+                            }}
+                            id="copy-btn"
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                color: '#5f259f',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                padding: '4px 8px',
+                                fontSize: '0.9rem'
+                            }}
+                        >
+                            Copy
+                        </button>
+                    </div>
+
                     <div style={{ marginBottom: '24px', borderTop: '1px dashed #ccc', borderBottom: '1px dashed #ccc', padding: '16px 0' }}>
                         <p style={{ fontSize: '1.2rem', margin: 0 }}>Amount to Pay</p>
                         <p style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#00ba00', margin: 0 }}>
                             {amount === 'Bulk Inquiry' ? 'To be confirmed' : `₹${amount}`}
                         </p>
                     </div>
+
+                    <a
+                        href={`upi://pay?pa=8074702928-2@axl&pn=M%20V%20VARALAKSHMI${amount && amount !== '0' && amount !== 'Bulk Inquiry' ? `&am=${amount}` : ''}&cu=INR`}
+                        style={{
+                            width: '100%',
+                            justifyContent: 'center',
+                            fontSize: '1.1rem',
+                            padding: '16px',
+                            backgroundColor: '#5f259f',
+                            color: 'white',
+                            marginBottom: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: '50px',
+                            textDecoration: 'none',
+                            fontWeight: 'bold'
+                        }}
+                    >
+                        ⚡ Pay with UPI Apps
+                    </a>
 
                     <div style={{ backgroundColor: '#e8f4fd', color: '#0056b3', padding: '12px', borderRadius: '8px', fontSize: '0.9rem', marginBottom: '24px', textAlign: 'left' }}>
                         <strong>Note:</strong> After successful payment, please click the button below to send your order details via WhatsApp.

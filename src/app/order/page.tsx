@@ -5,12 +5,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 
+const DELIVERY_CHARGE = 50;
+
 export default function OrderPage() {
     const router = useRouter();
     const { items, updateQuantity, removeItem, totalPrice, totalItems, clearCart } = useCart();
-    const [deliveryMode, setDeliveryMode] = useState<'delivery' | 'pickup'>('delivery');
+    const [deliveryMode, setDeliveryMode] = useState<'delivery' | 'pickup'>('pickup');
     const [isBulkOrder, setIsBulkOrder] = useState(false);
     const [minDate, setMinDate] = useState('');
+    const [bulkMinDate, setBulkMinDate] = useState('');
     const [minTime, setMinTime] = useState('');
     const [formData, setFormData] = useState({
         name: '',
@@ -39,6 +42,14 @@ export default function OrderPage() {
         const dd = String(today.getDate()).padStart(2, '0');
         const todayStr = `${yyyy}-${mm}-${dd}`;
         setMinDate(todayStr);
+
+        // Compute bulk min date (tomorrow)
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tY = tomorrow.getFullYear();
+        const tM = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        const tD = String(tomorrow.getDate()).padStart(2, '0');
+        setBulkMinDate(`${tY}-${tM}-${tD}`);
 
         // If today is selected or no date is selected yet, require 2 hours lead time
         if (!formData.date || formData.date === todayStr) {
@@ -107,7 +118,7 @@ export default function OrderPage() {
             message = `*New Order — Sri Hesritha's Cloud Kitchen*\n\n`;
             message += `*Name:* ${formData.name}\n`;
             message += `*Phone:* ${formData.phone}\n`;
-            message += `*Mode:* ${deliveryMode === 'delivery' ? 'Delivery' : 'Pickup'}\n`;
+            message += `*Mode:* ${deliveryMode === 'delivery' ? 'Delivery' : 'Home Pickup'}\n`;
 
             if (deliveryMode === 'delivery' && formData.address) {
                 message += `*Address:* ${formData.address}\n`;
@@ -120,7 +131,11 @@ export default function OrderPage() {
             items.forEach((ci) => {
                 message += `- ${ci.item.name} x${ci.quantity} — Rs.${ci.item.price * ci.quantity}\n`;
             });
-            message += `\n*Total: Rs.${totalPrice}*\n`;
+            if (deliveryMode === 'delivery') {
+                message += `\n*Delivery Charges:* Rs.${DELIVERY_CHARGE}\n`;
+            }
+            const finalTotal = deliveryMode === 'delivery' ? totalPrice + DELIVERY_CHARGE : totalPrice;
+            message += `\n*Total: Rs.${finalTotal}*\n`;
 
             if (formData.instructions) {
                 message += `\n*Special Instructions:* ${formData.instructions}\n`;
@@ -131,7 +146,8 @@ export default function OrderPage() {
         const encodedMessage = encodeURIComponent(message);
         // Save the message and total price, then redirect to Payment page
         localStorage.setItem('pendingWaMessage', message);
-        localStorage.setItem('paymentAmount', isBulkOrder ? 'Bulk Inquiry' : totalPrice.toString());
+        const paymentTotal = deliveryMode === 'delivery' ? totalPrice + DELIVERY_CHARGE : totalPrice;
+        localStorage.setItem('paymentAmount', isBulkOrder ? 'Bulk Inquiry' : paymentTotal.toString());
         router.push('/payment');
     };
 
@@ -191,9 +207,21 @@ export default function OrderPage() {
                                         </div>
                                     </div>
                                 ))}
+                                {deliveryMode === 'delivery' && (
+                                    <div className="cart-summary__total" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 12, marginBottom: 12 }}>
+                                        <span>Subtotal</span>
+                                        <span className="cart-summary__total-price">₹{totalPrice}</span>
+                                    </div>
+                                )}
+                                {deliveryMode === 'delivery' && (
+                                    <div className="cart-summary__total" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 12, marginBottom: 12 }}>
+                                        <span>🚚 Delivery Charges</span>
+                                        <span className="cart-summary__total-price" style={{ color: 'var(--color-primary)' }}>+ ₹{DELIVERY_CHARGE}</span>
+                                    </div>
+                                )}
                                 <div className="cart-summary__total">
                                     <span>Total</span>
-                                    <span className="cart-summary__total-price">₹{totalPrice}</span>
+                                    <span className="cart-summary__total-price">₹{deliveryMode === 'delivery' ? totalPrice + DELIVERY_CHARGE : totalPrice}</span>
                                 </div>
                                 <button
                                     className="btn btn-outline btn-sm"
@@ -232,17 +260,17 @@ export default function OrderPage() {
                                         <div className="delivery-toggle">
                                             <button
                                                 type="button"
-                                                className={`delivery-toggle__option ${deliveryMode === 'delivery' ? 'delivery-toggle__option--active' : ''}`}
-                                                onClick={() => setDeliveryMode('delivery')}
-                                            >
-                                                🚚 Delivery
-                                            </button>
-                                            <button
-                                                type="button"
                                                 className={`delivery-toggle__option ${deliveryMode === 'pickup' ? 'delivery-toggle__option--active' : ''}`}
                                                 onClick={() => setDeliveryMode('pickup')}
                                             >
-                                                🏠 Pickup
+                                                🏠 Home Pickup
+                                            </button>
+                                            <button
+                                                type="button"
+                                                className={`delivery-toggle__option ${deliveryMode === 'delivery' ? 'delivery-toggle__option--active' : ''}`}
+                                                onClick={() => setDeliveryMode('delivery')}
+                                            >
+                                                🚚 Delivery (+₹50)
                                             </button>
                                         </div>
                                     </div>
@@ -384,7 +412,7 @@ export default function OrderPage() {
                                                 id="bulk-date"
                                                 name="date"
                                                 required
-                                                min={minDate}
+                                                min={bulkMinDate}
                                                 value={bulkFormData.date}
                                                 onChange={handleInputChange}
                                             />
@@ -397,15 +425,13 @@ export default function OrderPage() {
                                                 id="bulk-time"
                                                 name="time"
                                                 required
-                                                min={minTime}
+                                                min="00:00"
                                                 value={bulkFormData.time}
                                                 onChange={handleInputChange}
                                             />
-                                            {(!bulkFormData.date || bulkFormData.date === minDate) && (
-                                                <small style={{ color: 'var(--color-primary)', fontSize: '0.8rem', marginTop: '4px', display: 'block' }}>
-                                                    *Requires at least 24 hours lead time
-                                                </small>
-                                            )}
+                                            <small style={{ color: 'var(--color-primary)', fontSize: '0.8rem', marginTop: '4px', display: 'block' }}>
+                                                *Requires at least 24 hours lead time
+                                            </small>
                                         </div>
                                     </div>
 
@@ -417,14 +443,14 @@ export default function OrderPage() {
                                                 type="number"
                                                 id="guestCount"
                                                 name="guestCount"
-                                                min="3"
+                                                min="20"
                                                 required
                                                 value={bulkFormData.guestCount}
                                                 onChange={handleInputChange}
-                                                placeholder="e.g., 10"
+                                                placeholder="e.g., 50"
                                             />
                                             <small style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem', marginTop: '4px', display: 'block' }}>
-                                                *Minimum 3 people for bulk orders
+                                                *Minimum 20 people for bulk orders
                                             </small>
                                         </div>
                                         <div className="form-group">
