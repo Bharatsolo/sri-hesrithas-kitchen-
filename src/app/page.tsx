@@ -33,14 +33,9 @@ export default function HomePage() {
             <Link href="/menu" className="btn btn-primary">
               🍽️ Explore Menu
             </Link>
-            <a
-              href="https://wa.me/918074702928?text=Hi!%20I%20would%20like%20to%20order%20from%20Sri%20Hesritha's%20Cloud%20Kitchen"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-whatsapp"
-            >
+            <Link href="/menu" className="btn btn-whatsapp">
               📱 Order on WhatsApp
-            </a>
+            </Link>
           </div>
         </div>
         <div className="hero__scroll-hint">Scroll</div>

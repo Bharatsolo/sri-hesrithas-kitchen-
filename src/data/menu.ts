@@ -15,7 +15,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'bagara-rice-chicken',
     name: 'Bagara Rice with Chicken Curry',
-    price: 249,
+    price: 349,
     category: 'non-veg',
     description: 'Fragrant bagara rice paired with our signature spicy chicken curry, slow-cooked with aromatic spices.',
     isVeg: false,
@@ -24,7 +24,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'raagi-mudde-chicken',
     name: 'Raagi Mudde with Chicken Curry',
-    price: 179,
+    price: 279,
     category: 'non-veg',
     description: 'Traditional ragi mudde served with rich and flavorful chicken curry — a wholesome comfort meal.',
     isVeg: false,
@@ -33,7 +33,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'pepper-chicken',
     name: 'Pepper Chicken',
-    price: 249,
+    price: 349,
     category: 'non-veg',
     description: 'Tender chicken tossed with cracked black pepper, curry leaves, and a bold spice blend.',
     isVeg: false,
@@ -42,7 +42,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'chilli-chicken',
     name: 'Chilli Chicken',
-    price: 249,
+    price: 349,
     category: 'non-veg',
     description: 'Indo-Chinese style chilli chicken with bell peppers, onions, and fiery sauces.',
     isVeg: false,
@@ -51,7 +51,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'chicken-lollipop',
     name: 'Chicken Lollipop (6 pcs)',
-    price: 249,
+    price: 349,
     category: 'non-veg',
     description: 'Crispy-fried chicken drumettes with a tangy, spicy glaze — perfect party starter.',
     isVeg: false,
@@ -60,7 +60,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'mutton-gravy',
     name: 'Mutton Gravy',
-    price: 369,
+    price: 469,
     category: 'non-veg',
     description: 'Slow-braised mutton in a rich, aromatic gravy with hand-ground spices and caramelized onions.',
     isVeg: false,
@@ -70,7 +70,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'bagara-rice-paneer',
     name: 'Bagara Rice with Paneer Curry',
-    price: 229,
+    price: 329,
     category: 'veg',
     description: 'Aromatic bagara rice served with creamy paneer curry in a velvety tomato-cashew gravy.',
     isVeg: true,
@@ -79,7 +79,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'coconut-milk-pulao',
     name: 'Coconut Milk Pulao',
-    price: 219,
+    price: 319,
     category: 'veg',
     description: 'Fragrant basmati rice cooked in creamy coconut milk with mild spices and fried cashews.',
     isVeg: true,
@@ -88,7 +88,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'stuffed-brinjal',
     name: 'Stuffed Brinjal Curry',
-    price: 169,
+    price: 269,
     category: 'veg',
     description: 'Baby brinjals stuffed with a peanut-sesame masala and simmered in a tangy tamarind gravy.',
     isVeg: true,
@@ -97,7 +97,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'chana-masala',
     name: 'Chana Masala',
-    price: 169,
+    price: 269,
     category: 'veg',
     description: 'Hearty chickpeas simmered in a robust, spiced tomato-onion gravy with fresh coriander.',
     isVeg: true,
@@ -106,7 +106,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'pulihora-rice',
     name: 'Pulihora Rice',
-    price: 99,
+    price: 199,
     category: 'veg',
     description: 'Traditional tamarind rice with peanuts, curry leaves, and a unique South Indian tang.',
     isVeg: true,
@@ -115,7 +115,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'tomato-rice',
     name: 'Tomato Rice',
-    price: 119,
+    price: 219,
     category: 'veg',
     description: 'Flavourful rice cooked with ripe tomatoes, onions, and aromatic spices.',
     isVeg: true,
@@ -124,7 +124,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'veg-biryani',
     name: 'Vegetable Biryani',
-    price: 219,
+    price: 319,
     category: 'veg',
     description: 'Layered basmati rice with seasoned mixed vegetables, fried onions, saffron, and biryani masala.',
     isVeg: true,
@@ -134,7 +134,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'standard-combo',
     name: 'Standard Veg Meals Combo',
-    price: 199,
+    price: 299,
     category: 'combo',
     description: 'A complete thali — Rice + Dal + Choice of Curry + Papad + Salad. The perfect wholesome meal.',
     isVeg: true,
@@ -144,7 +144,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'punganalu',
     name: 'Punganalu',
-    price: 79,
+    price: 179,
     category: 'breakfast',
     description: 'Traditional spiced rice and lentil dumplings, crispy on the outside and soft inside.',
     isVeg: true,
@@ -153,7 +153,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'poori-sabhji',
     name: 'Poori with sabhji',
-    price: 119,
+    price: 219,
     category: 'breakfast',
     description: 'Fluffy deep-fried whole wheat poories served with a spiced potato sabhji.',
     isVeg: true,
@@ -162,7 +162,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'pongal',
     name: 'Pongal',
-    price: 149,
+    price: 249,
     category: 'breakfast',
     description: 'Wholesome rice and moong dal porridge tempered with black pepper, cumin, and ginger.',
     isVeg: true,
@@ -171,7 +171,7 @@ export const menuItems: MenuItem[] = [
   {
     id: 'karabath',
     name: 'Karabath',
-    price: 99,
+    price: 199,
     category: 'breakfast',
     description: 'Savory semolina porridge cooked with vegetables and aromatic south Indian spices.',
     isVeg: true,

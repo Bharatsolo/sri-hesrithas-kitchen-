@@ -36,6 +36,8 @@ export default function Footer() {
                         <Link href="/menu" className="footer__link">Menu</Link>
                         <Link href="/order" className="footer__link">Order Now</Link>
                         <Link href="/contact" className="footer__link">Contact</Link>
+                        <Link href="/collaboration" className="footer__link">Collaboration</Link>
+                        <Link href="/delivery-partner" className="footer__link">Delivery Partner</Link>
                     </div>
 
                     <div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function PartnerPage() {
+export default function CollaborationPage() {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -19,8 +19,8 @@ export default function PartnerPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        let message = `🤝 *New Cloud Kitchen Partnership Inquiry*\n\n`;
-        message += `*Partner Name:* ${formData.name}\n`;
+        let message = `🤝 *New Cloud Kitchen Collaboration Inquiry*\n\n`;
+        message += `*Name:* ${formData.name}\n`;
         message += `*Phone:* ${formData.phone}\n`;
         message += `*Kitchen/Business Name:* ${formData.kitchenName}\n`;
         message += `*Location:* ${formData.location}\n`;
@@ -33,7 +33,6 @@ export default function PartnerPage() {
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/918074702928?text=${encodedMessage}`, '_blank');
 
-        // Reset form after submission
         setFormData({
             name: '',
             phone: '',
@@ -49,9 +48,9 @@ export default function PartnerPage() {
             <div className="container">
                 <div className="text-center" style={{ marginBottom: 48 }}>
                     <span className="section-label">Grow With Us</span>
-                    <h1 className="section-title">Become a Cloud Partner</h1>
+                    <h1 className="section-title">Collaborate With Us</h1>
                     <p className="section-subtitle" style={{ maxWidth: '600px', margin: '0 auto' }}>
-                        Do you run a kitchen or make amazing food? Partner with Sri Hesritha's Cloud Kitchen to expand your reach and sell under our platform! Fill out the form below to get started.
+                        Do you run a kitchen or make amazing food? Collaborate with Sri Hesritha&apos;s Cloud Kitchen to expand your reach and sell under our platform! Fill out the form below to get started.
                     </p>
                 </div>
 
@@ -130,7 +129,7 @@ export default function PartnerPage() {
                         </div>
 
                         <div className="form-group">
-                            <label className="form-label" htmlFor="message">Why do you want to partner with us?</label>
+                            <label className="form-label" htmlFor="message">Why do you want to collaborate with us?</label>
                             <textarea
                                 className="form-textarea"
                                 id="message"
@@ -146,7 +145,7 @@ export default function PartnerPage() {
                             className="btn btn-primary"
                             style={{ width: '100%', justifyContent: 'center', marginTop: '16px' }}
                         >
-                            🤝 Submit Partnership Request
+                            🤝 Submit Collaboration Request
                         </button>
                     </form>
                 </div>

@@ -24,7 +24,8 @@ export default function Navbar() {
         { href: '/menu', label: 'Menu' },
         { href: '/order', label: 'Order' },
         { href: '/contact', label: 'Contact' },
-        { href: '/partner', label: 'Partner' },
+        { href: '/collaboration', label: 'Collaboration' },
+        { href: '/delivery-partner', label: 'Delivery Partner' },
     ];
 
     const closeMobile = () => setMobileOpen(false);
